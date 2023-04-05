@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "dev": "nodemon server.js",
-    "start": "node server.js"
+    "start": "npx knex migrate:rollback --all && npx knex migrate:latest && npx knex seed:run && node server.js",
+    "reset": "npx knex migrate:rollback --all && npx knex migrate:latest && npx knex seed:run"
   },
   "keywords": [],
   "author": "",

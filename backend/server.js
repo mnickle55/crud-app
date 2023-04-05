@@ -5,8 +5,8 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 require('dotenv').config();
 
-const knex = require('knex')(require('./db/knexfile.js')[process.env.NODE_ENV||'development']);
-const port = process.env.PORT;
+const knex = require('knex')(require('./knexfile.js')[process.env.NODE_ENV||'development']);
+const port = process.env.PORT || 5000;
 
 const app = express();
 
