@@ -7,9 +7,7 @@ import './Home.css'
 const HomeDashboard = () => {
   return ( 
     <>
-      <Row>
-        <TopNav/>
-      </Row>
+      <TopNav/>
       <Row className='full-height'>
         <Col className='side-nav-container' xl={2} lg={2} md={2} sm={2}>
           <SideNav/>

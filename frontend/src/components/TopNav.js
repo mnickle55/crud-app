@@ -11,7 +11,7 @@ function TopNav() {
 
     return (
       <Navbar bg="dark" variant="dark" sticky="top">
-        <Container>
+        <>
           <Navbar.Brand href="/">
             <img
               src="./logo192.png"
@@ -23,7 +23,7 @@ function TopNav() {
 
           </Navbar.Brand>
           <Col className="me-auto">
-            <h1 className='title'>StockMate</h1>
+            <h1 className='title'>ShelfWise</h1>
           </Col>
           <Navbar.Collapse className="justify-content-end">
               {user && 
@@ -44,7 +44,7 @@ function TopNav() {
             }} variant="outline-light">Create Account</Button>}
             
           </Navbar.Collapse>
-        </Container>
+        </>
       </Navbar>
     );
 }

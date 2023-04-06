@@ -61,9 +61,8 @@ const EditItemForm = ({ setTrigger, trigger, item, setEditItem }) => {
   return (
     <Row className='item-row py-1 my-1 rounded'>
       <Form noValidate validated={validated} onSubmit={(e) => handleSubmit(e)}>
-
         <Row className="mb-1">
-          <Form.Group as={Col} md="4" lg="5">
+          <Form.Group as={Col} md="4" lg="4">
             <Form.Label>Item ID</Form.Label>
             <Form.Control
               ref={nameRef}
@@ -72,7 +71,7 @@ const EditItemForm = ({ setTrigger, trigger, item, setEditItem }) => {
               disabled
               type="text" />
           </Form.Group>
-          <Form.Group as={Col} md="4" lg="5">
+          <Form.Group as={Col} md="4" lg="4">
             <Form.Label>Create Date</Form.Label>
             <Form.Control
               ref={nameRef}
@@ -81,7 +80,7 @@ const EditItemForm = ({ setTrigger, trigger, item, setEditItem }) => {
               disabled
               type="text" />
           </Form.Group>
-          <Form.Group as={Col} md="4" lg="5" >
+          <Form.Group as={Col} md="4" lg="4" >
             <Form.Label>Update Date</Form.Label>
             <Form.Control
               ref={nameRef}

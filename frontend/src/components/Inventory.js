@@ -1,19 +1,19 @@
-import { useEffect, useState,useRef,useContext } from "react";
-import Form  from "react-bootstrap/Form";
+import { useEffect, useState, useRef, useContext } from "react";
+import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button"
-import { Container,Row,Col } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import Item from "./Item";
 import NewItemForm from "./NewItemForm";
 import { UserContext } from "../App";
 
 const Inventory = () => {
-  const [data,setData] = useState(null)
+  const [data, setData] = useState(null)
   const searchRef = useRef(null);
-  const {user, setUser} = useContext(UserContext);
-  const [filter,setFilter] = useState({"query":null});
-  const [selectedItemID,setSelectedItemID] = useState(null);
-  const [trigger,setTrigger] = useState(false)
-  const [activeCreateForm,setActiveCreateForm] = useState(false)
+  const { user, setUser } = useContext(UserContext);
+  const [filter, setFilter] = useState({ "query": null });
+  const [selectedItemID, setSelectedItemID] = useState(null);
+  const [trigger, setTrigger] = useState(false)
+  const [activeCreateForm, setActiveCreateForm] = useState(false)
 
   const handleChange = (e) => {
     setFilter({
@@ -30,28 +30,29 @@ const Inventory = () => {
   useEffect(() => {
     const controller = new AbortController()
     fetch('http://localhost:5000/items', {
-        signal: controller.signal,
+      signal: controller.signal,
     })
-        .then(res => res.json())
-        .then(data => {
-          setData(data)}
-          )
-        .catch(error => {
-            if (error.name !== 'AbortError') {
-                console.error(error.message)
-            }
-        })
+      .then(res => res.json())
+      .then(data => {
+        setData(data)
+      }
+      )
+      .catch(error => {
+        if (error.name !== 'AbortError') {
+          console.error(error.message)
+        }
+      })
 
     return () => controller.abort()
-}, [trigger])
+  }, [trigger])
 
-  return ( data && 
+  return (data &&
     <Container className='px-4 py-2'>
       <Row className='mb-4'>
         <h1>Inventory</h1>
-        <Col>
+        <Col className='mb-2'>
           <Form className="d-flex" onChange={(e) => handleChange(e)} >
-            <Form.Control  ref={searchRef}
+            <Form.Control ref={searchRef}
               type="search"
               placeholder="Begin typing to search..."
               className="me-2"
@@ -59,14 +60,18 @@ const Inventory = () => {
             />
           </Form>
         </Col>
-        <Col>
+        <Col className='text-end mb-3'>
+          {user && <Button onClick={() => handleCreateForm()} variant="primary">+ New Item</Button>}
         </Col>
-        <Col>
-        {user && <Button onClick={()=>handleCreateForm()} variant="primary">+ New</Button> }
-          
-        </Col>
+        <hr></hr>
       </Row>
-        
+      {activeCreateForm &&
+        <>
+          <h4>Create New Item</h4>
+          <NewItemForm setActiveCreateForm={setActiveCreateForm} trigger={trigger} setTrigger={setTrigger} />
+          <hr></hr>
+        </>
+      }
       <Row>
         <Col>
           <h5>Item ID</h5>
@@ -90,10 +95,10 @@ const Inventory = () => {
           <h5>Manager</h5>
         </Col>
       </Row>
-      {activeCreateForm && <NewItemForm setActiveCreateForm={setActiveCreateForm} trigger={trigger} setTrigger={setTrigger}/>}
-      {data.map((item,index)=><Item key={index} trigger={trigger} setTrigger={setTrigger} setSelectedItemID={setSelectedItemID} selectedItemID={selectedItemID} filter={filter} item={item}/>)}
+
+      {data.map((item, index) => <Item key={index} trigger={trigger} setTrigger={setTrigger} setSelectedItemID={setSelectedItemID} selectedItemID={selectedItemID} filter={filter} item={item} />)}
     </Container>
-   );
+  );
 }
- 
+
 export default Inventory;

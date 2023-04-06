@@ -7,9 +7,7 @@ import './Home.css'
 const HomeAccount = () => {
   return ( 
     <>
-      <Row>
-        <TopNav/>
-      </Row>
+      <TopNav/>
       <Row>
         <Col className='side-nav-container' xl={2} lg={2} md={2} sm={2}>
           <SideNav/>

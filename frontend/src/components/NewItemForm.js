@@ -87,7 +87,6 @@ const NewItemForm = ({setTrigger,trigger,setActiveCreateForm}) => {
             <Button onClick={()=>handleClose()}type="button" variant="light">Close</Button>
           </Col>
         </Row>
-        
       </Form>
     </Row>
   );

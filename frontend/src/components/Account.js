@@ -4,7 +4,7 @@ const Account = () => {
   return ( 
   <Row>
     <Col >
-      <h1>Account</h1>
+      <h1>My Account</h1>
     </Col>
   </Row>
    );

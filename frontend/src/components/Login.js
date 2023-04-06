@@ -1,9 +1,10 @@
 import { Container, Row, Col } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
 import { useRef,useContext } from 'react';
 import { UserContext } from '../App';
+import './Login.css'
 
 
 const Login = () => {
@@ -73,7 +74,11 @@ const Login = () => {
               <Button onClick={(e)=>handleSignIn(e)} variant="primary" type="submit">
                 Sign In
               </Button>
+              
             </Form>
+          </Row>
+          <Row>
+            <Link className='login-guest-link' to={'/inventory'}>Or continue as a guest</Link>
           </Row>
 
         </Col>
@@ -85,7 +90,7 @@ const Login = () => {
           </Row>
           <Row>
             <Col>
-              <h6>Sign up to discover the power of StockMate - an industry-leading inventory management software</h6>
+              <h6>Sign up to discover the power of ShelfWise - an industry-leading inventory management software</h6>
             </Col>
           </Row>
           <Row>
