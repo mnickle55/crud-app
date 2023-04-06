@@ -2,13 +2,15 @@ import { Container, Row, Col } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form'
 import { useNavigate } from 'react-router-dom';
-import { useRef } from 'react';
+import { useRef,useContext } from 'react';
+import { UserContext } from '../App';
 
 
 const Login = () => {
   const navigate = useNavigate();
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
+  const {user, setUser} = useContext(UserContext);
 
   const handleNavigateSignup = () => {
     navigate('/signup')
@@ -28,18 +30,18 @@ const Login = () => {
     })
     .then(res=> {
       if(res.status===200){
-        navigate('/inventory')
-      }
-      return res.text()})
-      .then(text=>{
-        console.log(text)
-        if(text==='No user account found' ){
+        return res.json()
+    }})
+    .then(json=>{
+      setUser(json)
+      navigate('/inventory')
+        if(json.message==='No user account found' ){
           emailRef.current.value=''
           passwordRef.current.value=''
-        } else if (text==='Invalid password'){
+        } else if (json.message==='Invalid password'){
           passwordRef.current.value=''
         }
-      })
+    })
     .catch(err => console.log(err) )
   }
 

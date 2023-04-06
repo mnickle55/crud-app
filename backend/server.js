@@ -24,7 +24,7 @@ app.post('/login', function (req, res) {
   knex.select('*').from('users')
     .then(users_table => {
       if(users_table.map(user=>user.email).includes(user.email)===false){
-        return res.status(400).send('No user account found')
+        return res.status(400).json({message:'No user account found'})
       }
 
       for (let users of users_table) {
@@ -35,10 +35,11 @@ app.post('/login', function (req, res) {
           userExists = true;
           bcrypt.compare(user.password, db_password, (error, result) => {
             if (result) {
-              return res.status(200).send('Logged in successfully')
+              let send = (({id,username,first_name,last_name})=>({id,username,first_name,last_name}))(users)
+              return res.status(200).json(send)
             }
             else {
-              return res.status(401).send('Invalid password')
+              return res.status(401).json({message:'Invalid password'})
             }
           })
         }
@@ -93,9 +94,17 @@ app.post('/signup', function (req, res) {
 })
 
 app.get('/items', function(req,res) {
-  knex
-    .select('*')
-    .from('items')
+  knex('items')
+  .join('users', 'items.user_id', 'users.id')
+  .select('items.id',
+  'users.id as user_id',
+  'users.first_name',
+  'users.last_name',
+  'items.name',
+  'items.description',
+  'items.created_at',
+  'items.updated_at',
+  'items.quantity')
     .then(data => res.status(200).json(data))
     .catch(err =>
       res.status(404).json({
@@ -103,7 +112,15 @@ app.get('/items', function(req,res) {
           'The data you are looking for could not be found. Please try again'
       })
     );
+})
 
+app.delete('/items/:id', function(req, res){
+  let itemID = req.params.id;
+
+  knex("items").where("id", itemID)
+    .del()
+    .then(data => res.status(200).json({message:"Deleted item"}))
+    .catch(err => res.status(404).json(err))
 })
 
 

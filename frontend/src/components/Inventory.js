@@ -1,43 +1,34 @@
-import { useEffect, useState,useRef } from "react";
+import { useEffect, useState,useRef,useContext } from "react";
 import Form  from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button"
 import { Container,Row,Col } from "react-bootstrap";
+import Item from "./Item";
+import NewItemForm from "./NewItemForm";
+import { UserContext } from "../App";
 
 const Inventory = () => {
-
   const [data,setData] = useState(null)
   const searchRef = useRef(null);
+  const {user, setUser} = useContext(UserContext);
+  const [filter,setFilter] = useState({"query":null});
+  const [selectedItemID,setSelectedItemID] = useState(null);
+  const [trigger,setTrigger] = useState(false)
+  const [activeCreateForm,setActiveCreateForm] = useState(false)
 
-  //brought over from mini-app one -needs refactor
-  const [filter,setFilter] = useState({"query":null,"watched":null})
-
-  //brought over from mini-app one -needs refactor
-  const handleKeyDown = (e) => {
-    if(e.key === 'Backspace' && (searchRef.current.firstElementChild.value.length===1 || searchRef.current.firstElementChild.value.length===0)){
-      setFilter({
-        ...filter,
-        query: null,
-      })
-    }
-    if(e.key === 'Enter'){
-      e.preventDefault();
-      handleSearch();
-    }
-  }
-
-  //brought over from mini-app one -needs refactor
-  const handleSearch = () => {
-    let query = searchRef.current.value;
-    console.log(query)
+  const handleChange = (e) => {
     setFilter({
       ...filter,
-      query: query,
+      query: searchRef.current.value,
     })
+  }
+
+  const handleCreateForm = () => {
+    let newState = !activeCreateForm
+    setActiveCreateForm(newState)
   }
 
   useEffect(() => {
     const controller = new AbortController()
-
     fetch('http://localhost:5000/items', {
         signal: controller.signal,
     })
@@ -52,39 +43,55 @@ const Inventory = () => {
         })
 
     return () => controller.abort()
-}, [])
+}, [trigger])
 
-
-  
   return ( data && 
-    <Container>
+    <Container className='px-4 py-2'>
       <Row>
         <Col>
-          <Form className="d-flex" onKeyDown={(e) => handleKeyDown(e)} >
+          <Form className="d-flex" onChange={(e) => handleChange(e)} >
             <Form.Control  ref={searchRef}
               type="search"
-              placeholder="Search"
+              placeholder="Begin typing to search"
               className="me-2"
               aria-label="Search"
             />
-            <Button variant="outline-dark" onClick={() => handleSearch()}>Search</Button>
           </Form>
         </Col>
         <Col>
           <h4>Filters</h4>
         </Col>
         <Col>
-          <Button variant="outline-dark">+ New</Button>
+        {user && <Button onClick={()=>handleCreateForm()} variant="primary">+ New</Button> }
+          
         </Col>
       </Row>
-      <ul>
-      {data.map((item,index) =>
-        <>
-          <li >{item.name}</li>
-          <li >{item.description}</li>
-        </>
-      )}
-      </ul>
+        
+      <Row>
+        <Col>
+          <h5>Item ID</h5>
+        </Col>
+        <Col>
+          <h5>Create Date</h5>
+        </Col>
+        <Col>
+          <h5>Update Date</h5>
+        </Col>
+        <Col>
+          <h5>Name</h5>
+        </Col>
+        <Col xl={3} lg={3} md={3}>
+          <h5>Description</h5>
+        </Col>
+        <Col>
+          <h5>Quantity</h5>
+        </Col>
+        <Col>
+          <h5>Manager</h5>
+        </Col>
+      </Row>
+      {activeCreateForm && <NewItemForm/>}
+      {data.map((item,index)=><Item key={index} trigger={trigger} setTrigger={setTrigger} setSelectedItemID={setSelectedItemID} selectedItemID={selectedItemID} filter={filter} item={item}/>)}
     </Container>
    );
 }

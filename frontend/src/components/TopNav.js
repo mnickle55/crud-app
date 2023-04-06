@@ -1,10 +1,13 @@
 import React from 'react';
+import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, Col, Button, Navbar } from 'react-bootstrap';
 import './TopNav.css'
+import { UserContext } from '../App';
 
 function TopNav() {
   const Navigate = useNavigate();
+  const {user, setUser} = useContext(UserContext);
 
     return (
       <Navbar bg="dark" variant="dark" sticky="top">
@@ -23,10 +26,16 @@ function TopNav() {
             <h1 className='title'>StockMate</h1>
           </Col>
           <Navbar.Collapse className="justify-content-end">
-            <Navbar.Text>
-              Signed in as:  <span id='user-name'></span>
-            </Navbar.Text>
+              {user && 
+              <Navbar.Text>
+                Signed in as:  <span id='user-name'>{user.username}</span>
+              </Navbar.Text>}
+              {!user && 
+              <Navbar.Text>
+                Signed in as:  <span id='user-name'>Guest</span>
+              </Navbar.Text>}
             <Button className='mx-4' onClick={() => {
+              setUser(null)
               Navigate("/login");
             }} variant="outline-light">Logout</Button>
           </Navbar.Collapse>
