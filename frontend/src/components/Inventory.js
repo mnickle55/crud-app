@@ -1,12 +1,13 @@
 import { useEffect, useState,useRef } from "react";
 import Form  from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button"
+import { Container,Row,Col } from "react-bootstrap";
 
 const Inventory = () => {
 
   const [data,setData] = useState(null)
   const searchRef = useRef(null);
-  
+
   //brought over from mini-app one -needs refactor
   const [filter,setFilter] = useState({"query":null,"watched":null})
 
@@ -27,6 +28,7 @@ const Inventory = () => {
   //brought over from mini-app one -needs refactor
   const handleSearch = () => {
     let query = searchRef.current.value;
+    console.log(query)
     setFilter({
       ...filter,
       query: query,
@@ -55,25 +57,35 @@ const Inventory = () => {
 
   
   return ( data && 
-    <>
-      <Form className="d-flex" ref={searchRef} onKeyDown={(e)=>handleKeyDown(e)} >
-            <Form.Control 
+    <Container>
+      <Row>
+        <Col>
+          <Form className="d-flex" onKeyDown={(e) => handleKeyDown(e)} >
+            <Form.Control  ref={searchRef}
               type="search"
               placeholder="Search"
               className="me-2"
               aria-label="Search"
             />
-            <Button variant="outline-dark" onClick={()=>handleSearch()}>Search</Button>
+            <Button variant="outline-dark" onClick={() => handleSearch()}>Search</Button>
           </Form>
+        </Col>
+        <Col>
+          <h4>Filters</h4>
+        </Col>
+        <Col>
+          <Button variant="outline-dark">+ New</Button>
+        </Col>
+      </Row>
       <ul>
-      {data.map(item =>
+      {data.map((item,index) =>
         <>
-          <li>{item.name}</li>
-          <li>{item.description}</li>
+          <li >{item.name}</li>
+          <li >{item.description}</li>
         </>
       )}
       </ul>
-    </>
+    </Container>
    );
 }
  
