@@ -92,5 +92,19 @@ app.post('/signup', function (req, res) {
   }
 })
 
+app.get('/items', function(req,res) {
+  knex
+    .select('*')
+    .from('items')
+    .then(data => res.status(200).json(data))
+    .catch(err =>
+      res.status(404).json({
+        message:
+          'The data you are looking for could not be found. Please try again'
+      })
+    );
+
+})
+
 
 app.listen(port, () => console.log(`Serving listing on port ${port}`));
