@@ -21,7 +21,12 @@ const NewItemForm = ({setTrigger,trigger,setActiveCreateForm}) => {
       e.preventDefault();
       e.stopPropagation();
     }
+    if(nameRef.current.value==='' || descriptionRef.current.value==='' || quantityRef.current.value===''){
+      setValidated(true)
+      return
+    }
     e.preventDefault();
+    handleClose();
     fetch('http://localhost:5000/items', {
       method: "POST",
       body: JSON.stringify({

@@ -11,7 +11,6 @@ function TopNav() {
 
     return (
       <Navbar bg="dark" variant="dark" sticky="top">
-        <>
           <Navbar.Brand href="/">
             <img
               src="./logo192.png"
@@ -42,9 +41,7 @@ function TopNav() {
               setUser(null)
               Navigate("/signup");
             }} variant="outline-light">Create Account</Button>}
-            
           </Navbar.Collapse>
-        </>
       </Navbar>
     );
 }

@@ -17,7 +17,12 @@ const EditItemForm = ({ setTrigger, trigger, item, setEditItem }) => {
       e.preventDefault();
       e.stopPropagation();
     }
+    if(nameRef.current.value==='' || descriptionRef.current.value==='' || quantityRef.current.value===''){
+      setValidated(true)
+      return
+    }
     e.preventDefault();
+    setEditItem(null)
     fetch('http://localhost:5000/items', {
       method: "PATCH",
       body: JSON.stringify({
@@ -98,7 +103,6 @@ const EditItemForm = ({ setTrigger, trigger, item, setEditItem }) => {
               required
               defaultValue={item.name}
               type="text" />
-
           </Form.Group>
           <Form.Group as={Col} md="3" controlId="validationCustom05">
             <Form.Label>Quantity</Form.Label>
