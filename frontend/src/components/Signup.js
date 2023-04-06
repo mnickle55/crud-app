@@ -34,9 +34,16 @@ const Signup = () => {
       console.log(res)
       if(res.status===200){
         navigate('/login')
-      }
+      } 
       return res.text()})
-      .then(text=>console.log(text))
+      .then(text=>{
+        if(text==='Passwords do not match'){
+          passwordRef.current.value=''
+          retypedPasswordRef.current.value=''
+        } else if (text==='This username is already taken'){
+          usernameRef.current.value=''
+        }
+      })
     .catch(err => console.log(err) )
   }
 

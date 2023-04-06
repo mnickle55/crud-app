@@ -23,6 +23,10 @@ app.post('/login', function (req, res) {
   let user = req.body;
   knex.select('*').from('users')
     .then(users_table => {
+      if(users_table.map(user=>user.email).includes(user.email)===false){
+        return res.status(400).send('No user account found')
+      }
+
       for (let users of users_table) {
         let db_email = users.email;
         let db_password = users.password;
@@ -31,15 +35,12 @@ app.post('/login', function (req, res) {
           userExists = true;
           bcrypt.compare(user.password, db_password, (error, result) => {
             if (result) {
-              res.status(200).send('Logged in successfully')
+              return res.status(200).send('Logged in successfully')
             }
             else {
-              res.status(401).send('Invalid email or password')
+              return res.status(401).send('Invalid password')
             }
           })
-        }
-        if(!userExists){
-          res.status(401).send('No user account found')
         }
       }
     })
@@ -51,7 +52,7 @@ app.post('/signup', function (req, res) {
   let validPass = true
 
   if (user.password !== user.retypedPassword) {
-    res.status(401).send("Passwords do not match")
+    res.status(400).send('Passwords do not match')
     validPass = false
   }
 
@@ -60,11 +61,11 @@ app.post('/signup', function (req, res) {
       .then(users_table => {
         for (let users of users_table) {
           if (user.username === users.username) {
-            res.status(401).send('This username is already taken')
+            res.status(400).send('This username is already taken')
             throw new Error('username taken')
           }
           else if (user.email === users.email) {
-            res.status(401).send('Account with this email already exists')
+            res.status(400).send('Account with this email already exists')
             throw new Error('email taken')
           }
         }

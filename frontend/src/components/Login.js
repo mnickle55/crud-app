@@ -31,7 +31,15 @@ const Login = () => {
         navigate('/inventory')
       }
       return res.text()})
-      .then(text=>console.log(text))
+      .then(text=>{
+        console.log(text)
+        if(text==='No user account found' ){
+          emailRef.current.value=''
+          passwordRef.current.value=''
+        } else if (text==='Invalid password'){
+          passwordRef.current.value=''
+        }
+      })
     .catch(err => console.log(err) )
   }
 
