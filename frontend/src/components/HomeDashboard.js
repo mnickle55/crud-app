@@ -2,6 +2,7 @@ import TopNav from "./TopNav";
 import { Row,Col } from "react-bootstrap";
 import SideNav from "./SideNav";
 import Dashboard from "./Dashboard";
+import './Home.css'
 
 const HomeDashboard = () => {
   return ( 
@@ -9,11 +10,11 @@ const HomeDashboard = () => {
       <Row>
         <TopNav/>
       </Row>
-      <Row>
-        <Col xl={2} lg={2} md={2} sm={2}>
+      <Row className='full-height'>
+        <Col className='side-nav-container' xl={2} lg={2} md={2} sm={2}>
           <SideNav/>
         </Col>
-        <Col xl={10} lg={10} md={10} sm={10}>
+        <Col className='full-height' xl={10} lg={10} md={10} sm={10}>
           <Dashboard/>
         </Col>
       </Row>

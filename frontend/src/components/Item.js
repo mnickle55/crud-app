@@ -1,10 +1,13 @@
 import { Row,Col, Button } from "react-bootstrap";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import './Item.css'
 import { UserContext } from "../App";
+import EditItemForm from "./EditItemForm";
+import {MdModeEditOutline} from 'react-icons/md'
 
 const Item = ({item,filter,selectedItemID,setSelectedItemID,setTrigger,trigger}) => {
   const {user, setUser} = useContext(UserContext);
+  const [editItem,setEditItem] = useState(null)
 
   const handleClick = (id) => {
     if(id===selectedItemID){
@@ -14,24 +17,21 @@ const Item = ({item,filter,selectedItemID,setSelectedItemID,setTrigger,trigger})
     }
   }
 
-  const handleDelete = (e,id) => {
+
+
+  const handleEdit = (e,id) => {
     e.stopPropagation()
-    fetch(`http://localhost:5000/items/${id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-type": "application/json; charset=UTF-8"
-      }
-    })
-    .then(res=>{
-      let newTrigger = !trigger
-      setTrigger(newTrigger)
-      return res.json()})
-    .catch(err=>console.log(err))
+    setEditItem(id)
   }
 
   let joined = `${item.description}${item.name}${item.first_name}${item.last_name}`
   if(filter.query){
     if(joined.toLowerCase().includes(filter.query.toLowerCase())){
+      if(editItem){
+        return (
+          <EditItemForm setEditItem={setEditItem} trigger={trigger} setTrigger={setTrigger} item={item}/>
+        )
+      }
       return ( 
         <Row onClick={()=>handleClick(item.id)} key={item.id} className='item-row py-1 my-1 rounded'>
           <Col>
@@ -47,13 +47,18 @@ const Item = ({item,filter,selectedItemID,setSelectedItemID,setTrigger,trigger})
             {item.name}
           </Col>
           {selectedItemID === item.id &&
-            <Col xl={3} lg={3} md={3}>
+            <Col className="item-description" xl={3} lg={3} md={3}>
               {item.description}
             </Col>
           } 
-          {selectedItemID !== item.id &&
-            <Col xl={3} lg={3} md={3}>
+          {selectedItemID !== item.id && item.description.length>100 &&
+            <Col className="item-description" xl={3} lg={3} md={3}>
               {item.description.slice(0,100).concat('...')}
+            </Col>
+          } 
+          {selectedItemID !== item.id && item.description.length<100 &&
+            <Col className="item-description" xl={3} lg={3} md={3}>
+              {item.description}
             </Col>
           } 
           <Col>
@@ -61,9 +66,14 @@ const Item = ({item,filter,selectedItemID,setSelectedItemID,setTrigger,trigger})
           </Col>
           {user && user.id === item.user_id &&
             <Col>
-              Me
-              <Button onClick={(e)=>handleDelete(e,item.id)} variant="danger">Delete</Button>
-              <Button variant="primary">Edit</Button>
+              <Row>
+                <p>Me</p>
+              </Row>
+              <Row>
+                <Col>
+                  <Button onClick={(e) => handleEdit(e, item.id)} variant="light"><MdModeEditOutline /></Button>
+                </Col>
+              </Row>
             </Col>
           }
           {(!user || user.id !== item.user_id) &&
@@ -75,6 +85,11 @@ const Item = ({item,filter,selectedItemID,setSelectedItemID,setTrigger,trigger})
       );
     }
   } else {
+    if(editItem){
+      return (
+        <EditItemForm setEditItem={setEditItem} trigger={trigger} setTrigger={setTrigger} item={item}/>
+      )
+    }
     return ( 
       <Row onClick={()=>handleClick(item.id)} key={item.id} className='item-row py-1 my-1 rounded'>
         <Col>
@@ -89,14 +104,19 @@ const Item = ({item,filter,selectedItemID,setSelectedItemID,setTrigger,trigger})
         <Col>
           {item.name}
         </Col>
-        {selectedItemID === item.id &&
-            <Col xl={3} lg={3} md={3}>
+          {selectedItemID === item.id &&
+            <Col className="item-description" xl={3} lg={3} md={3}>
               {item.description}
             </Col>
           } 
-          {selectedItemID !== item.id &&
-            <Col xl={3} lg={3} md={3}>
+          {selectedItemID !== item.id && item.description.length>100 &&
+            <Col className="item-description" xl={3} lg={3} md={3}>
               {item.description.slice(0,100).concat('...')}
+            </Col>
+          } 
+          {selectedItemID !== item.id && item.description.length<100 &&
+            <Col className="item-description" xl={3} lg={3} md={3}>
+              {item.description}
             </Col>
           } 
         <Col>
@@ -104,9 +124,14 @@ const Item = ({item,filter,selectedItemID,setSelectedItemID,setTrigger,trigger})
         </Col>
         {user && user.id===item.user_id && 
           <Col>
-            Me
-            <Button onClick={(e)=>handleDelete(e,item.id)} variant="danger">Delete</Button>
-            <Button variant="primary">Edit</Button>
+          <Row>
+            <p>Me</p>
+          </Row>
+          <Row>
+            <Col>
+              <Button onClick={(e)=>handleEdit(e,item.id)} variant="light"><MdModeEditOutline/></Button>
+            </Col>
+          </Row>
           </Col>
         }
         {(!user || user.id !== item.user_id) &&

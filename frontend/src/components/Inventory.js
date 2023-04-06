@@ -47,19 +47,19 @@ const Inventory = () => {
 
   return ( data && 
     <Container className='px-4 py-2'>
-      <Row>
+      <Row className='mb-4'>
+        <h1>Inventory</h1>
         <Col>
           <Form className="d-flex" onChange={(e) => handleChange(e)} >
             <Form.Control  ref={searchRef}
               type="search"
-              placeholder="Begin typing to search"
+              placeholder="Begin typing to search..."
               className="me-2"
               aria-label="Search"
             />
           </Form>
         </Col>
         <Col>
-          <h4>Filters</h4>
         </Col>
         <Col>
         {user && <Button onClick={()=>handleCreateForm()} variant="primary">+ New</Button> }
@@ -90,7 +90,7 @@ const Inventory = () => {
           <h5>Manager</h5>
         </Col>
       </Row>
-      {activeCreateForm && <NewItemForm/>}
+      {activeCreateForm && <NewItemForm setActiveCreateForm={setActiveCreateForm} trigger={trigger} setTrigger={setTrigger}/>}
       {data.map((item,index)=><Item key={index} trigger={trigger} setTrigger={setTrigger} setSelectedItemID={setSelectedItemID} selectedItemID={selectedItemID} filter={filter} item={item}/>)}
     </Container>
    );

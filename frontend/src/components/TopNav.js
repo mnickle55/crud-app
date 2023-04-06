@@ -34,10 +34,15 @@ function TopNav() {
               <Navbar.Text>
                 Signed in as:  <span id='user-name'>Guest</span>
               </Navbar.Text>}
-            <Button className='mx-4' onClick={() => {
+              {user && <Button className='mx-4' onClick={() => {
               setUser(null)
               Navigate("/login");
-            }} variant="outline-light">Logout</Button>
+            }} variant="outline-light">Logout</Button>}
+              {!user && <Button className='mx-4' onClick={() => {
+              setUser(null)
+              Navigate("/signup");
+            }} variant="outline-light">Create Account</Button>}
+            
           </Navbar.Collapse>
         </Container>
       </Navbar>

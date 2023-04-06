@@ -24,7 +24,7 @@ app.post('/login', function (req, res) {
   knex.select('*').from('users')
     .then(users_table => {
       if(users_table.map(user=>user.email).includes(user.email)===false){
-        return res.status(400).json({message:'No user account found'})
+        res.status(400).send('No user account found')
       }
 
       for (let users of users_table) {
@@ -36,10 +36,10 @@ app.post('/login', function (req, res) {
           bcrypt.compare(user.password, db_password, (error, result) => {
             if (result) {
               let send = (({id,username,first_name,last_name})=>({id,username,first_name,last_name}))(users)
-              return res.status(200).json(send)
+              res.status(200).json(send)
             }
             else {
-              return res.status(401).json({message:'Invalid password'})
+              res.status(401).send('Invalid password')
             }
           })
         }
@@ -91,6 +91,25 @@ app.post('/signup', function (req, res) {
       })
       .catch(err => console.log(err))
   }
+})
+
+app.post('/items', function(req,res){
+  let newItem = req.body
+  knex('items')
+    .insert(newItem)
+    .then(data=>res.status(200).json(newItem))
+})
+
+app.patch('/items', function(req,res){
+  let updatedItem = req.body
+  knex('items')
+    .where('id','=',updatedItem.id)
+    .update({
+      name: updatedItem.name,
+      quantity: updatedItem.quantity,
+      description: updatedItem.description
+    })
+    .then(data=>res.status(200).json(updatedItem))
 })
 
 app.get('/items', function(req,res) {

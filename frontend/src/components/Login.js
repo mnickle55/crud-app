@@ -31,18 +31,17 @@ const Login = () => {
     .then(res=> {
       if(res.status===200){
         return res.json()
-    }})
+      } else {
+        throw new Error('invalid login')
+      }
+    })
     .then(json=>{
       setUser(json)
       navigate('/inventory')
-        if(json.message==='No user account found' ){
-          emailRef.current.value=''
-          passwordRef.current.value=''
-        } else if (json.message==='Invalid password'){
-          passwordRef.current.value=''
-        }
     })
-    .catch(err => console.log(err) )
+    .catch(err => {
+      console.log(err)
+    })
   }
 
   return (
