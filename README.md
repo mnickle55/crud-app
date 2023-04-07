@@ -24,6 +24,22 @@ docker-compose up
 ```
 3. Open up localhost:3000 in your preferred browser.
 
+```bash
+The database will be seeded with two initial user accounts.
+To login and see the experience from an inventory manager point of view, use one of the following sets of login credentials:
+
+User 1:
+Email: blee@gmail.com
+Password: password
+
+User 2: 
+Email: evater@gmail.com
+Password: password
+
+Otherwise, you can login as a guest user or create an account by clicking on the signup button!
+
+```
+
 ## Running the App without Docker Compose:
 1. Clone this repository to your local machine.
 
@@ -60,3 +76,19 @@ npm start
 ```
 
 5. Open up localhost:3000 in your preferred browser
+
+```bash
+The database will be seeded with two initial user accounts.
+To login and see the experience from an inventory manager point of view, use one of the following sets of login credentials:
+
+User 1:
+Email: blee@gmail.com
+Password: password
+
+User 2: 
+Email: evater@gmail.com
+Password: password
+
+Otherwise, you can login as a guest user or create an account by clicking on the signup button!
+
+```
