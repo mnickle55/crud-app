@@ -54,6 +54,7 @@ const EditItemForm = ({ setTrigger, trigger, item, setEditItem }) => {
       }
     })
     .then(res=>{
+      setEditItem(null)
       let newTrigger = !trigger
       setTrigger(newTrigger)
       return res.json()})

@@ -1,15 +1,19 @@
 .item-row{
-  background-color: rgba(199, 199, 198, 0.855);
+  background-color: white;
   transition: all .2s ease-in-out;
+  border: solid rgb(108, 110, 118);
+  border-width: 1px;
 }
 
 .item-row-highlight{
-  background-color: rgb(206, 211, 223);
+  background-color: rgb(160, 210, 237);
   scale: 1.01;
+  border: solid rgb(108, 110, 118);
+  border-width: 1px;
 }
 
 .item-row:hover{
-  background-color: rgb(206, 211, 223);
+  background-color: rgb(160, 210, 237);
   scale: 1.01;
 }
 

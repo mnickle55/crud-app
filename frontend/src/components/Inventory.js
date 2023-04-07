@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef, useContext } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button"
-import { Container, Row, Col } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import Item from "./Item";
 import NewItemForm from "./NewItemForm";
 import { UserContext } from "../App";
@@ -12,7 +12,7 @@ const Inventory = () => {
   const [data, setData] = useState(null)
   const searchRef = useRef(null);
   const { user, setUser } = useContext(UserContext);
-  const [filter, setFilter] = useState({ "query": null });
+  const [filter, setFilter] = useState({ "query": null,"user":null });
   const [selectedItemID, setSelectedItemID] = useState(null);
   const [trigger, setTrigger] = useState(false)
   const [activeCreateForm, setActiveCreateForm] = useState(false)
@@ -30,6 +30,21 @@ const Inventory = () => {
     setActiveCreateForm(newState)
   }
 
+  const handleShowUserInventory = () => {
+    if(user.id===filter.user){
+      setFilter({
+        ...filter,
+        user: null
+      })
+    } else {
+      setFilter({
+        ...filter,
+        user: user.id
+      })
+    }
+  }
+
+  //create loading effect for inventory data
   useEffect(() => {
     setLoading(true)
     const timer = setTimeout(() => {
@@ -70,6 +85,12 @@ const Inventory = () => {
             />
           </Form>
         </Col>
+        <Col>
+        {user && user.id === filter.user && <Button onClick={()=>handleShowUserInventory()} variant="secondary">Show All Inventory</Button>
+        }
+        {user && user.id !== filter.user && <Button onClick={()=>handleShowUserInventory()} variant="dark">Show My Inventory</Button>
+        }
+        </Col>
         <Col className='text-end mb-3'>
           {user && <Button onClick={() => handleCreateForm()} variant="primary">+ New Item</Button>}
         </Col>
@@ -77,7 +98,7 @@ const Inventory = () => {
       </Row>
       {activeCreateForm &&
         <>
-          <h4>Create New Item</h4>
+          <h4>Create New Inventory Item</h4>
           <NewItemForm setActiveCreateForm={setActiveCreateForm} trigger={trigger} setTrigger={setTrigger} />
           <hr></hr>
         </>
@@ -106,7 +127,7 @@ const Inventory = () => {
         </Col>
       </Row>
       <hr></hr>
-      {loading && <Spinner />}
+      {loading && <Spinner/>}
       {!loading && <>
         {data.map((item, index) => 
         <Item key={index} trigger={trigger} setTrigger={setTrigger} setSelectedItemID={setSelectedItemID} selectedItemID={selectedItemID} filter={filter} item={item} />)}

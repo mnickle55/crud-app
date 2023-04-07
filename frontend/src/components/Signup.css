@@ -7,22 +7,42 @@
   color:rgb(117, 116, 113)
 }
 
-.signup-background{
-  background-color: rgb(99, 154, 182);
-}
-
-.text-white{
-  color:aliceblue
-}
-
-.footer{
-  background-color: rgb(99, 154, 182);
+.text-black{
+  color:black;
 }
 
 .signup-container{
-  min-height: 100vh;
+  background: linear-gradient(-45deg, #ee7752, #cb7193, #23a6d5, #23d5ab);
+	background-size: 400% 400%;
+	animation: gradient 25s ease infinite;
+	height: 100vh;
 }
 
 .small-logo{
-  scale: 70%;
+  scale: 50%;
+}
+
+.form-wrapper-top{
+  background-color: rgb(242, 245, 249);
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.form-wrapper-bottom{
+  background-color: rgb(242, 245, 249);
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  padding-bottom: 10px;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 }

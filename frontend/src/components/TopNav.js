@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Container, Col, Button, Navbar } from 'react-bootstrap';
 import './TopNav.css'
 import { UserContext } from '../App';
+import { Link } from 'react-router-dom';
 
 function TopNav() {
   const Navigate = useNavigate();
@@ -11,7 +12,7 @@ function TopNav() {
 
     return (
       <Navbar bg="dark" variant="dark" sticky="top">
-          <Navbar.Brand href="/inventory">
+            <Link to={'/inventory'}> <Navbar.Brand>
             <img
               src="./logo192.png"
               width="80"
@@ -19,8 +20,8 @@ function TopNav() {
               className="d-inline-block align-top rounded"
               alt="logo"
             />
-
-          </Navbar.Brand>
+          </Navbar.Brand></Link>
+          
           <Col className="me-auto">
             <h1 className='title'>ShelfWise</h1>
           </Col>

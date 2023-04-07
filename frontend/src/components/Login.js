@@ -1,9 +1,10 @@
-import { Container, Row, Col } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form'
 import { useNavigate,Link } from 'react-router-dom';
 import { useRef,useContext } from 'react';
 import { UserContext } from '../App';
+import Stack from 'react-bootstrap/Stack';
 import './Login.css'
 
 
@@ -33,6 +34,8 @@ const Login = () => {
       if(res.status===200){
         return res.json()
       } else {
+        emailRef.current.value=''
+        passwordRef.current.value=''
         throw new Error('invalid login')
       }
     })
@@ -49,10 +52,11 @@ const Login = () => {
     <div className='login-container'>
       <Row>
         <Col md={8} lg={8} sm={8} className='px-5'>
-          <Row>
-            <Col>
+          <Row className='d-flex align-items-center'>
+            <Stack direction="horizontal" gap={0}>
               <img className='small-logo' src="./logo192.png" alt="site-logo"></img>
-            </Col>
+              <h4>ShelfWise</h4>
+            </Stack>
           </Row>
           <Row className='justify-content-center text-center mb-3 my-5'>
             <Col>
@@ -72,7 +76,6 @@ const Login = () => {
               <Button onClick={(e)=>handleSignIn(e)} variant="primary" type="submit">
                 Sign In
               </Button>
-              
             </Form>
             </Col>
           </Row>

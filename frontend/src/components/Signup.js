@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Signup.css'
+import Stack from 'react-bootstrap/Stack'
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -17,6 +18,9 @@ const Signup = () => {
 
   const handleSignUp = (e) => {
     e.preventDefault();
+    if(firstNameRef.current.value==='' || lastNameRef.current.value==='' || lastNameRef.current.value==='' || emailRef.current.value ==='' || usernameRef.current.value==='' || passwordRef.current.value==='' || retypedPasswordRef.current.value===''){
+      return
+    }
     fetch('http://localhost:5000/signup', {
       method: "POST",
       body: JSON.stringify({
@@ -53,17 +57,18 @@ const Signup = () => {
       <Row className='signup-background'>
         <Col>
           <Row>
-            <Col>
+          <Stack direction="horizontal" gap={0}>
               <img className='small-logo' src="./logo192.png" alt="site-logo"></img>
-            </Col>
+              <h4>ShelfWise</h4>
+            </Stack>
           </Row>
-          <Row className='justify-content-center text-center pb-2'>
-            <Col md={6} lg={6}>
+          <Row className='justify-content-center text-center'>
+            <Col md={6} lg={6} className='form-wrapper-top'>
               <h1>Signup</h1>
             </Col>
           </Row>
-          <Row className='justify-content-center py-4'>
-            <Col md={6} lg={6}>
+          <Row className='justify-content-center py-0'>
+            <Col md={6} lg={6} className='form-wrapper-bottom px-3'>
               <Form>
                 <Form.Group className="mb-3">
                   <Form.Control ref={firstNameRef} placeholder="First Name" />
@@ -76,7 +81,7 @@ const Signup = () => {
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                   <Form.Control ref={emailRef} type="email" placeholder="Email" />
-                  <Form.Text className="text-white mx-2">
+                  <Form.Text className="text-black mx-2">
                     We'll never share your email with anyone else.
                   </Form.Text>
                 </Form.Group>
