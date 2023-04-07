@@ -91,9 +91,13 @@ const Signup = () => {
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                   <Form.Control ref={retypedPasswordRef} type="password" placeholder="Retype Password" />
                 </Form.Group>
-                <Button className='signup-btn' onClick={(e) => handleSignUp(e)} variant="primary" type="submit">
+                <Row className='text-center'>
+                  <Col>
+                  <Button className='signup-btn' onClick={(e) => handleSignUp(e)} variant="primary" type="submit">
                   Sign Up
                 </Button>
+                  </Col>
+                </Row>
               </Form>
             </Col>
           </Row>

@@ -1,6 +1,7 @@
 import './App.css';
 import Login from './components/Login';
 import Signup from './components/Signup';
+import PageNotFound from './components/PageNotFound';
 import { createContext, useState } from 'react';
 import {Routes , Route } from 'react-router-dom';
 import HomeInventory from './components/HomeInventory';
@@ -21,6 +22,7 @@ function App() {
           <Route path="/inventory" element={<HomeInventory/>}/>
           <Route path="/dashboard" element={<HomeDashboard/>}/>
           <Route path="/account" element={<HomeAccount/>}/>
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </UserContext.Provider>
 

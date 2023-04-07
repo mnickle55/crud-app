@@ -86,7 +86,7 @@ const Inventory = () => {
           </Form>
         </Col>
         <Col>
-        {user && user.id === filter.user && <Button onClick={()=>handleShowUserInventory()} variant="secondary">Show All Inventory</Button>
+        {user && user.id === filter.user && <Button onClick={()=>handleShowUserInventory()} variant="primary">Show All Inventory</Button>
         }
         {user && user.id !== filter.user && <Button onClick={()=>handleShowUserInventory()} variant="dark">Show My Inventory</Button>
         }
