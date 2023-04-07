@@ -1,0 +1,9 @@
+.close-btn{
+  scale: 1.05;
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.close-btn:hover{
+  border-color: transparent;
+}

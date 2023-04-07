@@ -5,6 +5,7 @@ import { UserContext } from "../App";
 import EditItemForm from "./EditItemForm";
 import {MdModeEditOutline} from 'react-icons/md'
 
+
 const Item = ({item,filter,selectedItemID,setSelectedItemID,setTrigger,trigger}) => {
   const {user, setUser} = useContext(UserContext);
   const [editItem,setEditItem] = useState(null)
@@ -67,11 +68,11 @@ const Item = ({item,filter,selectedItemID,setSelectedItemID,setTrigger,trigger})
           {user && user.id === item.user_id &&
             <Col>
               <Row>
-                <p>Me</p>
+                <p className='me-text'>Me</p>
               </Row>
               <Row>
                 <Col>
-                  <Button onClick={(e) => handleEdit(e, item.id)} variant="light"><MdModeEditOutline /></Button>
+                  <Button className='edit-btn' onClick={(e) => handleEdit(e, item.id)}><MdModeEditOutline/></Button>
                 </Col>
               </Row>
             </Col>
@@ -125,12 +126,14 @@ const Item = ({item,filter,selectedItemID,setSelectedItemID,setTrigger,trigger})
         {user && user.id===item.user_id && 
           <Col>
           <Row>
-            <p>Me</p>
-          </Row>
-          <Row>
             <Col>
-              <Button onClick={(e)=>handleEdit(e,item.id)} variant="light"><MdModeEditOutline/></Button>
+              <p className='me-text'>Me</p>
             </Col>
+            <Col className='p-0 m-0 d-flex align-items-start'>
+              <Button className='edit-btn' onClick={(e)=>handleEdit(e,item.id)} variant="light"><MdModeEditOutline/></Button>
+            </Col>
+            
+            
           </Row>
           </Col>
         }

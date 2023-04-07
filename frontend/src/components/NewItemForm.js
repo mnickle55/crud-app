@@ -3,6 +3,8 @@ import { useContext,useRef,useState } from "react";
 import './NewItemForm.css'
 import { UserContext } from "../App";
 import Form from 'react-bootstrap/Form';
+import {GrClose} from 'react-icons/gr'
+
 
 const NewItemForm = ({setTrigger,trigger,setActiveCreateForm}) => {
   const {user, setUser} = useContext(UserContext);
@@ -59,6 +61,9 @@ const NewItemForm = ({setTrigger,trigger,setActiveCreateForm}) => {
               required
               type="text"/>
           </Form.Group>
+          <Col className='text-end'>
+            <Button className='close-btn' onClick={()=>handleClose()} type="button" variant="light"><GrClose/></Button>
+          </Col>
         </Row>
         <Row className="mb-1">
           <Form.Group controlId="exampleForm.ControlTextarea1">
@@ -81,15 +86,9 @@ const NewItemForm = ({setTrigger,trigger,setActiveCreateForm}) => {
             ref={quantityRef}
             min="1" 
             required />
-            <Form.Control.Feedback type="invalid">
-              Please provide a valid quantity.
-            </Form.Control.Feedback>
           </Form.Group>
-          <Col>
-            <Button type="submit">Create</Button>
-          </Col>
-          <Col>
-            <Button onClick={()=>handleClose()}type="button" variant="light">Close</Button>
+          <Col className='d-flex align-items-end mx-2'>
+            <Button type="submit" variant="success">Create</Button>
           </Col>
         </Row>
       </Form>

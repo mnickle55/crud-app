@@ -1,0 +1,28 @@
+.signup-btn{
+  margin-left: 42%;
+  margin-right: 40%;
+}
+
+.already-account{
+  color:rgb(117, 116, 113)
+}
+
+.signup-background{
+  background-color: rgb(99, 154, 182);
+}
+
+.text-white{
+  color:aliceblue
+}
+
+.footer{
+  background-color: rgb(99, 154, 182);
+}
+
+.signup-container{
+  min-height: 100vh;
+}
+
+.small-logo{
+  scale: 70%;
+}

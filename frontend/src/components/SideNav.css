@@ -1,3 +1,11 @@
 .nav-link{
   color: aliceblue;
 }
+
+.nav-link:hover{
+  color: rgb(202, 98, 185);
+}
+
+.sidenav-icon{
+  margin-right: 5px;
+}

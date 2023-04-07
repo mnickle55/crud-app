@@ -11,3 +11,21 @@
 .item-description{
   overflow-wrap: break-word;
 }
+
+.edit-btn{
+  background-color: transparent;
+  padding: 0;
+  border-color: transparent;
+  color: rgb(33, 112, 240);
+  scale: 1.1;
+}
+
+.edit-btn:hover{
+  background-color: transparent;
+  border-color: transparent;
+  color: aliceblue;
+}
+
+.me-text{
+  font-weight: bold;
+}

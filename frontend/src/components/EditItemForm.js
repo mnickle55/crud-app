@@ -3,6 +3,7 @@ import { useContext, useRef, useState } from "react";
 import './EditItemForm.css'
 import { UserContext } from "../App";
 import Form from 'react-bootstrap/Form';
+import Stack from 'react-bootstrap/Stack';
 
 const EditItemForm = ({ setTrigger, trigger, item, setEditItem }) => {
   const { user, setUser } = useContext(UserContext);
@@ -131,16 +132,12 @@ const EditItemForm = ({ setTrigger, trigger, item, setEditItem }) => {
             </Form.Control.Feedback>
           </Form.Group>
         </Row>
-        <Row className="mb-2">
-          <Col>
-            <Button type="submit">Save</Button>
-          </Col>
-          <Col>
+        <Row className="mb-2 my-2">
+          <Stack direction="horizontal" gap={3}>
+            <Button variant="success" type="submit">Save</Button>
+            <Button onClick={(e) => handleDelete(e, item.id)} variant="danger">Delete</Button>
             <Button onClick={() => handleClose()} variant="light" type="button">Close</Button>
-          </Col>
-          <Col>
-            <Button onClick={(e)=>handleDelete(e,item.id)} variant="danger">Delete</Button>
-          </Col>
+          </Stack>
         </Row>
       </Form>
     </Row>

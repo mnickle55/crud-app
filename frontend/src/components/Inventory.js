@@ -5,6 +5,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import Item from "./Item";
 import NewItemForm from "./NewItemForm";
 import { UserContext } from "../App";
+import './Home.css'
 
 const Inventory = () => {
   const [data, setData] = useState(null)
@@ -47,7 +48,7 @@ const Inventory = () => {
   }, [trigger])
 
   return (data &&
-    <Container className='px-4 py-2'>
+    <Container fluid className='px-4 py-2 inventory-container'>
       <Row className='mb-4'>
         <h1>Inventory</h1>
         <Col className='mb-2'>
@@ -95,6 +96,7 @@ const Inventory = () => {
           <h5>Manager</h5>
         </Col>
       </Row>
+      <hr></hr>
 
       {data.map((item, index) => <Item key={index} trigger={trigger} setTrigger={setTrigger} setSelectedItemID={setSelectedItemID} selectedItemID={selectedItemID} filter={filter} item={item} />)}
     </Container>

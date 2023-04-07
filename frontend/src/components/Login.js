@@ -46,26 +46,24 @@ const Login = () => {
   }
 
   return (
-    <Container>
+    <div className='login-container'>
       <Row>
-        <Col md={8} lg={8} sm={8}>
+        <Col md={8} lg={8} sm={8} className='px-5'>
           <Row>
             <Col>
-              <img src="./logo192.png" alt="site-logo"></img>
+              <img className='small-logo' src="./logo192.png" alt="site-logo"></img>
             </Col>
           </Row>
-          <Row>
+          <Row className='justify-content-center text-center mb-3 my-5'>
             <Col>
-              <h1>Login to Your Account</h1>
+              <h1 >Login to Your Account</h1>
             </Col>
           </Row>
-          <Row>
-            <Form>
+          <Row className='login-form justify-content-center'>
+            <Col md={8} lg={6} sm={8} xl={6}>
+            <Form >
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Control type="email" placeholder="Enter email" ref={emailRef} />
-                <Form.Text className="text-muted">
-                  We'll never share your email with anyone else.
-                </Form.Text>
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -76,31 +74,32 @@ const Login = () => {
               </Button>
               
             </Form>
+            </Col>
           </Row>
-          <Row>
-            <Link className='login-guest-link' to={'/inventory'}>Or continue as a guest</Link>
+          <Row className= 'my-4 text-center'>
+            <Link  className='login-guest-link' to={'/inventory'}>Or continue as a guest</Link>
           </Row>
 
         </Col>
-        <Col>
-          <Row>
+        <Col className='new-here-wrapper justify-content-center text-center'>
+          <Row className='mb-3'>
             <Col>
               <h1>New Here?</h1>
             </Col>
           </Row>
-          <Row>
+          <Row className='text-start px-5 mb-3'>
             <Col>
               <h6>Sign up to discover the power of ShelfWise - an industry-leading inventory management software</h6>
             </Col>
           </Row>
           <Row>
             <Col>
-              <Button onClick={()=>handleNavigateSignup()}>Sign Up</Button>
+              <Button variant='light' onClick={()=>handleNavigateSignup()}>Sign Up</Button>
             </Col>
           </Row>
         </Col>
       </Row>
-    </Container>
+    </div>
   );
 }
 

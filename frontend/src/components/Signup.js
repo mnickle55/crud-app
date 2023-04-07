@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form';
 import { Link } from 'react-router-dom';
 import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './Signup.css'
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -48,58 +49,57 @@ const Signup = () => {
   }
 
   return (
-    <Container>
-      <Row>
-        <Col md={8} lg={8} sm={8}>
+    <div className='signup-container'>
+      <Row className='signup-background'>
+        <Col>
           <Row>
             <Col>
-              <img src="./logo192.png" alt="site-logo"></img>
+              <img className='small-logo' src="./logo192.png" alt="site-logo"></img>
             </Col>
           </Row>
-          <Row>
-            <Col>
+          <Row className='justify-content-center text-center pb-2'>
+            <Col md={6} lg={6}>
               <h1>Signup</h1>
             </Col>
           </Row>
-          <Row>
-            <Form>
-              <Form.Group className="mb-3">
-                <Form.Control ref={firstNameRef} placeholder="First Name" />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Control ref={lastNameRef} placeholder="Last Name" />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Control ref={usernameRef} placeholder="Username" />
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Control ref={emailRef} type="email" placeholder="Email" />
-                <Form.Text className="text-muted">
-                  We'll never share your email with anyone else.
-                </Form.Text>
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Control ref={passwordRef} type="password" placeholder="Password" />
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Control ref={retypedPasswordRef} type="password" placeholder="Retype Password" />
-              </Form.Group>
-              <Button onClick={(e)=>handleSignUp(e)} variant="primary" type="submit">
-                Sign Up
-              </Button>
-            </Form>
+          <Row className='justify-content-center py-4'>
+            <Col md={6} lg={6}>
+              <Form>
+                <Form.Group className="mb-3">
+                  <Form.Control ref={firstNameRef} placeholder="First Name" />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Control ref={lastNameRef} placeholder="Last Name" />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Control ref={usernameRef} placeholder="Username" />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                  <Form.Control ref={emailRef} type="email" placeholder="Email" />
+                  <Form.Text className="text-white mx-2">
+                    We'll never share your email with anyone else.
+                  </Form.Text>
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicPassword">
+                  <Form.Control ref={passwordRef} type="password" placeholder="Password" />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicPassword">
+                  <Form.Control ref={retypedPasswordRef} type="password" placeholder="Retype Password" />
+                </Form.Group>
+                <Button className='signup-btn' onClick={(e) => handleSignUp(e)} variant="primary" type="submit">
+                  Sign Up
+                </Button>
+              </Form>
+            </Col>
           </Row>
         </Col>
       </Row>
-      <Row>
-        <Col>
-          <h6>Already have an account?</h6>
-        </Col>
-        <Col>
-          <Link to={'/login'}>Login </Link>
+      <Row className='footer justify-content-center align-content-center text-center py-3 my-0'>
+        <Col md={3} lg={3}>
+          <h6 className='text-white'>Already have an account? <Link className='text-white' to={'/login'}>Login </Link></h6>
         </Col>
       </Row>
-    </Container>
+    </div>
   );
 }
 
