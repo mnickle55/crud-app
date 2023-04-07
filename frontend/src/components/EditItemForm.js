@@ -18,7 +18,7 @@ const EditItemForm = ({ setTrigger, trigger, item, setEditItem }) => {
       e.preventDefault();
       e.stopPropagation();
     }
-    if(nameRef.current.value==='' || descriptionRef.current.value==='' || quantityRef.current.value===''){
+    if(nameRef.current.value==='' || descriptionRef.current.value==='' || quantityRef.current.value==='' || parseInt(quantityRef.current.value)>=1000000 || parseInt(quantityRef.current.value)<=0){
       setValidated(true)
       return
     }
@@ -113,9 +113,10 @@ const EditItemForm = ({ setTrigger, trigger, item, setEditItem }) => {
               ref={quantityRef}
               defaultValue={item.quantity}
               min="1"
+              max='1000000'
               required />
             <Form.Control.Feedback type="invalid">
-              Please provide a valid quantity.
+              Please provide a valid quantity greater than 0 and less than 1 million.
             </Form.Control.Feedback>
           </Form.Group>
         </Row>

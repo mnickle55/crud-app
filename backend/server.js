@@ -3,13 +3,16 @@ const cors = require('cors');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const cookieSession = require('cookie-session')
 const bcrypt = require('bcrypt')
 require('dotenv').config();
 
 const knex = require('knex')(require('./knexfile.js')[process.env.NODE_ENV || 'development']);
-const port = parseInt(process.env.POR) || 5000;
+const port = parseInt(process.env.PORT) || 5000;
 
 const app = express();
+
+
 
 const saltRounds = parseInt(process.env.SALT);
 
@@ -46,6 +49,7 @@ app.post('/login', function (req, res) {
       }
     })
 })
+
 
 //handle user signup
 app.post('/signup', function (req, res) {
@@ -124,7 +128,8 @@ app.get('/items', function(req,res) {
   'items.created_at',
   'items.updated_at',
   'items.quantity')
-    .then(data => res.status(200).json(data))
+    .then(data => 
+      res.status(200).json(data))
     .catch(err =>
       res.status(404).json({
         message:

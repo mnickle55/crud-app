@@ -23,7 +23,7 @@ const NewItemForm = ({setTrigger,trigger,setActiveCreateForm}) => {
       e.preventDefault();
       e.stopPropagation();
     }
-    if(nameRef.current.value==='' || descriptionRef.current.value==='' || quantityRef.current.value===''){
+    if(nameRef.current.value==='' || descriptionRef.current.value==='' || quantityRef.current.value==='' || parseInt(quantityRef.current.value)>=1000000 || parseInt(quantityRef.current.value)<=0){
       setValidated(true)
       return
     }
@@ -84,8 +84,12 @@ const NewItemForm = ({setTrigger,trigger,setActiveCreateForm}) => {
             <Form.Control 
             type="number" 
             ref={quantityRef}
-            min="1" 
+            min="1"
+            max='1000000'
             required />
+            <Form.Control.Feedback type="invalid">
+              Please provide a valid quantity greater than 0 and less than 1 million.
+            </Form.Control.Feedback>
           </Form.Group>
           <Col className='d-flex align-items-end mx-2'>
             <Button type="submit" variant="success">Create</Button>
