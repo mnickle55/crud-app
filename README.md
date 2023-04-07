@@ -22,7 +22,7 @@ I can't believe what I've been able to learn in the last few months :)
 docker-compose up
 
 ```
-3. Open up localhost:3000 in your preferred browser.
+3. Open up localhost:3000 in your preferred browser after all the containers are running.
 
 ```bash
 The database will be seeded with two initial user accounts.
