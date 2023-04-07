@@ -6,6 +6,7 @@ import Item from "./Item";
 import NewItemForm from "./NewItemForm";
 import { UserContext } from "../App";
 import './Home.css'
+import Spinner from "react-bootstrap/Spinner";
 
 const Inventory = () => {
   const [data, setData] = useState(null)
@@ -15,6 +16,7 @@ const Inventory = () => {
   const [selectedItemID, setSelectedItemID] = useState(null);
   const [trigger, setTrigger] = useState(false)
   const [activeCreateForm, setActiveCreateForm] = useState(false)
+  const [loading,setLoading] = useState(false)
 
   const handleChange = (e) => {
     setFilter({
@@ -29,6 +31,14 @@ const Inventory = () => {
   }
 
   useEffect(() => {
+    setLoading(true)
+    const timer = setTimeout(() => {
+      setLoading(false)
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
     const controller = new AbortController()
     fetch('http://localhost:5000/items', {
       signal: controller.signal,
@@ -36,8 +46,7 @@ const Inventory = () => {
       .then(res => res.json())
       .then(data => {
         setData(data)
-      }
-      )
+      })
       .catch(error => {
         if (error.name !== 'AbortError') {
           console.error(error.message)
@@ -48,7 +57,7 @@ const Inventory = () => {
   }, [trigger])
 
   return (data &&
-    <Container fluid className='px-4 py-2 inventory-container'>
+    <div fluid className='px-4 py-2 inventory-container'>
       <Row className='mb-4'>
         <h1>Inventory</h1>
         <Col className='mb-2'>
@@ -97,9 +106,13 @@ const Inventory = () => {
         </Col>
       </Row>
       <hr></hr>
-
-      {data.map((item, index) => <Item key={index} trigger={trigger} setTrigger={setTrigger} setSelectedItemID={setSelectedItemID} selectedItemID={selectedItemID} filter={filter} item={item} />)}
-    </Container>
+      {loading && <Spinner />}
+      {!loading && <>
+        {data.map((item, index) => 
+        <Item key={index} trigger={trigger} setTrigger={setTrigger} setSelectedItemID={setSelectedItemID} selectedItemID={selectedItemID} filter={filter} item={item} />)}
+      </> }
+      
+    </div>
   );
 }
 

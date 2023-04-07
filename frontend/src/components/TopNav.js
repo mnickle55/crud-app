@@ -11,7 +11,7 @@ function TopNav() {
 
     return (
       <Navbar bg="dark" variant="dark" sticky="top">
-          <Navbar.Brand href="/">
+          <Navbar.Brand href="/inventory">
             <img
               src="./logo192.png"
               width="80"

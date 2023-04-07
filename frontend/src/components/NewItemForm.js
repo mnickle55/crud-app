@@ -51,7 +51,7 @@ const NewItemForm = ({setTrigger,trigger,setActiveCreateForm}) => {
   };
 
     return ( 
-    <Row className='item-row py-1 my-1 rounded'>
+    <Row className='item-row-highlight py-1 my-1 rounded'>
       <Form noValidate validated={validated} onSubmit={(e) => handleSubmit(e)}>
         <Row className="mb-1">
           <Form.Group as={Col} md="4" lg="5" controlId="validationCustom01">
@@ -74,7 +74,7 @@ const NewItemForm = ({setTrigger,trigger,setActiveCreateForm}) => {
               as="textarea"
               rows={3} />
               <Form.Control.Feedback type="invalid">
-              Please provide a valid description that is no longer than 300 characters.
+              Please provide a valid description that is no longer than 400 characters.
             </Form.Control.Feedback>
           </Form.Group>
         </Row>

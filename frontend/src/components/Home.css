@@ -6,3 +6,8 @@
   height: 100%;
 }
 
+.inventory-container {
+  background-color: aliceblue;
+  min-height: 100vh;
+}
+

@@ -1,6 +1,11 @@
 .item-row{
-  background-color: rgb(213, 213, 210);
-  transition: all .1s ease-in-out;
+  background-color: rgba(199, 199, 198, 0.855);
+  transition: all .2s ease-in-out;
+}
+
+.item-row-highlight{
+  background-color: rgb(206, 211, 223);
+  scale: 1.01;
 }
 
 .item-row:hover{
