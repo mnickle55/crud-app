@@ -13,8 +13,9 @@
 }
 
 .item-row:hover{
-  background-color: rgb(160, 210, 237);
-  scale: 1.01;
+  background-color: rgb(218, 224, 227);
+  scale: 1.005;
+  cursor: pointer;
 }
 
 .item-description{
