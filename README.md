@@ -36,7 +36,7 @@ User 2:
 Email: evater@gmail.com
 Password: password
 
-Otherwise, you can login as a guest user or create an account by clicking on the signup button!
+Otherwise, you can login as a guest user or create an account by clicking on the signup button! After creating an account, you will need to login with your credentials to begin.
 
 ```
 
@@ -89,6 +89,6 @@ User 2:
 Email: evater@gmail.com
 Password: password
 
-Otherwise, you can login as a guest user or create an account by clicking on the signup button!
+Otherwise, you can login as a guest user or create an account by clicking on the signup button! After creating an account, you will need to login with your credentials to begin.
 
 ```
